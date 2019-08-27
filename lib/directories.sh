@@ -18,7 +18,7 @@ function cd() {
     oldpwd="$OLDPWD" &&
     builtin pushd . >/dev/null &&
     for ((index="${#DIRSTACK[@]}"-1; index>=1; index--)); do
-      if [[ "${DIRSTACK[0]}" == "${DIRSTACK[$index]}" ]]; then
+      if [[ "${DIRSTACK[0]/#~/$HOME}" == "${DIRSTACK[$index]}" ]]; then
         builtin popd "+$index" >/dev/null || return 1
       fi
     done
